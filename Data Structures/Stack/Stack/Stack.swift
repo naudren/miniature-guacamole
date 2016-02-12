@@ -1,4 +1,12 @@
+//
+//  Stack.swift
+//  Stack
+//
+//  Created by Nicolas Audren on 12/02/2016.
+//  Copyright © 2016 Nicosoft. All rights reserved.
+//
 
+import Foundation
 
 public struct Stack<T> {
     
@@ -29,28 +37,6 @@ public struct Stack<T> {
     func peek() -> T? {
         
         return array.last
-
+        
     }
 }
-
-
-var myStack = Stack<Int>()
-
-myStack.pop()
-
-myStack.push(5)
-print(myStack.array)
-
-myStack.peek()
-
-
-myStack.push(10)
-print(myStack.array)
-
-myStack.peek()
-
-myStack.pop()
-print(myStack.array)
-
-
-
