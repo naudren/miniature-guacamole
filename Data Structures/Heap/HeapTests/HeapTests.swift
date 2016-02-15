@@ -261,13 +261,16 @@ class HeapTests: XCTestCase {
     func testRemoveRandomItems() {
         for n in 1...40 {
             var a = randomArray(n)
+            print(a)
             var h = Heap(array: a, sort: >)
+            print(h)
             XCTAssertTrue(verifyMaxHeap(h))
             XCTAssertTrue(isPermutation(a, h.elements))
             
             let m = (n + 1)/2
             for k in 1...m {
                 let i = Int(arc4random_uniform(UInt32(n - k + 1)))
+                print(i)
                 let v = h.removeAtIndex(i)!
                 let j = a.indexOf(v)!
                 a.removeAtIndex(j)
@@ -313,5 +316,4 @@ class HeapTests: XCTestCase {
         XCTAssertTrue(verifyMaxHeap(h))
         XCTAssertEqual(h.elements, [16, 14, 13, 8, 7, 10, 3, 2, 4, 1])
     }
-    
 }

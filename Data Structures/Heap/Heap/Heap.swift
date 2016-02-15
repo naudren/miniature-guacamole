@@ -65,7 +65,7 @@ public struct Heap<T> {
                 
                 elements.insert(last, atIndex: 0)
                 
-                shiftDown(0)
+                shiftDown(0, heapSize: count)
             }
             
             return first
@@ -76,7 +76,7 @@ public struct Heap<T> {
         if index != count - 1 {
             swap(&elements[index], &elements[count-1])
             
-            shiftDown(index)
+            shiftDown(index, heapSize: count - 1)
             shiftUp(index)
         }
         return elements.removeLast()
@@ -117,7 +117,7 @@ public struct Heap<T> {
     private mutating func buildHeap(array: [T]) {
         elements = array
         for var i = (count/2 - 1);i>=0;--i {
-            shiftDown(i)
+            shiftDown(i,heapSize: count)
         }
     }
     
@@ -136,19 +136,19 @@ public struct Heap<T> {
         }
     }
     
-    private mutating func shiftDown(index: Int) {
+    private mutating func shiftDown(index: Int, heapSize: Int) {
         let currentValue = elements[index]
         
         let leftChildIndex = indexOfLeftChild(index)
         let rightChildIndex = indexOfRightChild(index)
         
         var leftChildValue: T?
-        if leftChildIndex < count {
+        if leftChildIndex < heapSize {
             leftChildValue = elements[leftChildIndex]
         }
         
         var rightChildValue: T?
-        if rightChildIndex < count {
+        if rightChildIndex < heapSize {
             rightChildValue = elements[rightChildIndex]
         }
         
@@ -164,7 +164,7 @@ public struct Heap<T> {
             if sorter(candidateToSwapValue,currentValue) {
                 elements[candidateToSwapIndex] = currentValue
                 elements[index] = candidateToSwapValue
-                shiftDown(candidateToSwapIndex)
+                shiftDown(candidateToSwapIndex, heapSize: heapSize)
             }
         }
         
